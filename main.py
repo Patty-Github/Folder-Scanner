@@ -162,37 +162,3 @@ outputFile.write(f"length of format info sorted {len(sortedFormatInfo)}, length 
 # close file
 outputFile.close()
 #outputFile.write()
-
-
-'''
-
-order of operations:
-
-1. scan folders
-2. get info from folders
-3. sort info from folders
-4. output info from folders
-
-TO DO 
-
-
-
-old code
-
-#folderSizeMB = get_folder_size('C:\\Blender Addons') / 1000000
-#dotPos = str(folderSizeMB).find('.')
-
-#print("Folder size: ", str(folderSizeMB)[:dotPos], "MB")
-
-#print(get_folder_size('C:\\test'))
-
-#fileSizeMB = os.path.getsize("folderer") / 1000000
-
-#os.walk()
-
-#print(str(fileSizeMB), " MB")
-
-
-
-
-'''
