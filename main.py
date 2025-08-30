@@ -9,7 +9,7 @@ formatInfo = []
 #specify root path
 rootPath = 'C:\\'
 # how many folders scanning
-numOfFolders = 25
+numOfFolders = 10
 # open txt file
 outputFile = open("info.txt", "w")
 
@@ -26,19 +26,16 @@ def get_folder_size(folder):
 
         for g in filenames:
             fullPath = os.path.join(dirpath, g)
+            # output every file and it's size
             print(f"Full Path: {fullPath}, Size: {os.path.getsize(fullPath)}")
-            outputFile.write(f"Full Path: {fullPath}, Size: {os.path.getsize(fullPath)} \n \n")
-            #print(f"Filename is {g} size is {os.path.getsize(fullPath)}, dirpath is {dirpath}, "
-            #      f"maybe size is {os.path.getsize(dirpath)}")
+            #outputFile.write(f"Full Path: {fullPath}, Size: {os.path.getsize(fullPath)} \n \n")
             fileType = g[g.rfind('.'):]
             # if format isn't in list, add format to list, add 1 to format's quantNum, add fileSize
             if not any(fileType in g for g in formatInfo):
                 #print("format is not in")
                 formatInfo.append((fileType, 1, os.path.getsize(fullPath)))
-
             else:
                 # add 1 to format's quantNum, add size to fileSize
-
                 indexOfFileType = 0
                 # get index of fileType
                 for index, l in enumerate(formatInfo):
@@ -98,9 +95,10 @@ for i in allFolders:
     allFolderNamesAndSizes.append((currentDir, str(thisFolderSizeMB)[:dotPos]))
     #limit number of folders scanned
     numScanned = numScanned + 1
-    if numScanned >= numOfFolders:
+    # Don't comment this out if you want to limit # of folders scanned
+    #if numScanned >= numOfFolders:
         #print("Scan Finished")
-        break
+        #break
 
 
 # convert format info from bytes to GB
@@ -164,7 +162,6 @@ outputFile.write(f"length of format info sorted {len(sortedFormatInfo)}, length 
 # close file
 outputFile.close()
 #outputFile.write()
-
 
 
 '''
