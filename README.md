@@ -8,6 +8,3 @@ Every file's name and size (in bytes) that is scanned. So if a whole PC is scann
 Lists every file format (eg. txt, mp4, etc), how many times it appeared, and how much space that format takes up (in MBs), listed biggest size to smallest.
 
 Lists GBs Scanned
-
-
-There is currently an error that happens near the end (line 152) I believe due to a file having a symbol for a name instead of text. By this point all important information should be output to .txt so I'm not in a rush to fix it. Also not sure how to, so.
