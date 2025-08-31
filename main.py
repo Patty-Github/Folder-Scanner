@@ -11,7 +11,7 @@ rootPath = 'C:\\'
 # how many folders scanning
 numOfFolders = 10
 # open txt file
-outputFile = open("info.txt", "w")
+outputFile = open("info.txt", "w", encoding="utf-8")
 
 '''
 Calcs
@@ -57,16 +57,18 @@ def get_folder_size(folder):
                 formatInfo.clear()
                 formatInfo.extend(tuple(formatInfoList))
 
-            #print("G", g[g.rfind('.'):])
             #formatInfo.append(f"{g[g.rfind('.'):]}")
 
+        # calculate folder size
         for f in filenames:
             fullPath = os.path.join(dirpath, f)
-            #print(f"fullPath {fullPath}")
-            if not os.path.islink(fullPath):
-                folder_size += os.path.getsize(fullPath)
+            # try is here incase file isn't found.
+            try:
+                if not os.path.islink(fullPath):
+                    folder_size += os.path.getsize(fullPath)
+            except FileNotFoundError:
+                pass
 
-    #print("NUM OF FORMAT", formatInfo)
     return folder_size
 
 
@@ -85,7 +87,7 @@ outputFile.write("Folder Name and Sizes \n \n")
 allFolderNamesAndSizes = []
 for i in allFolders:
     # current folder name
-    currentDir = f"{rootPath}{i}"
+    currentDir = os.path.join(rootPath, i)
     # get size of this folder
     thisFolderSizeMB = get_folder_size(currentDir) / 1000000
     # remove cents and print this folder
@@ -97,8 +99,9 @@ for i in allFolders:
     numScanned = numScanned + 1
     # Don't comment this out if you want to limit # of folders scanned
     #if numScanned >= numOfFolders:
-        #print("Scan Finished")
         #break
+
+print("Scan Finished")
 
 
 # convert format info from bytes to GB
@@ -155,10 +158,5 @@ for item in sortedFormatInfo:
 print(f"Scanned {totalMB}MB or {totalMB / 1000}GB")
 outputFile.write(f"Scanned {totalMB}MB or {totalMB / 1000}GB \n \n")
 
-print(f"length of format info sorted {len(sortedFormatInfo)}, length of format info mb {len(formatInfoMB)}")
-outputFile.write(f"length of format info sorted {len(sortedFormatInfo)}, length of format info mb {len(formatInfoMB)} \n \n")
-#
-
 # close file
 outputFile.close()
-#outputFile.write()
